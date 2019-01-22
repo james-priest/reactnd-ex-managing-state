@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-const value1 = Math.floor(Math.random() * 100);
-const value2 = Math.floor(Math.random() * 100);
-const value3 = Math.floor(Math.random() * 100);
-const proposedAnswer = Math.floor(Math.random() * 3) + value1 + value2 + value3;
-const numQuestions = 0;
-const numCorrect = 0;
+import Game from './Game.js';
+import Score from './Score.js';
 
 class App extends Component {
+  /*constructor(props) {
+    super(props);
+    this.state = {
+      numQuestions: 0,
+      numCorrect: 0
+    }
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }*/
+  // Defining state as a Class field means we can avoid this in the constructor
+  state = {
+    numQuestions: 0,
+    numCorrect: 0
+  }
+  /*handleButtonClick(e) { // <- this form means we need to bind 'this' in constructor
+    console.log('e.target', e.target.innerText);
+    this.setState(currState => ({
+      numQuestions: currState.numQuestions + 1
+    }))
+  }*/
+  handleButtonClick = e => { // <- this form doesn't require bind 'this' in constructor
+    console.log('e.target', e.target.innerText);
+    this.setState(currState => ({
+      numQuestions: currState.numQuestions + 1
+    }))
+  };
+  renderGame = game => (<Game onButtonClick={this.handleButtonClick} />)
+
   render() {
     return (
       <div className="App">
@@ -17,17 +39,14 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
-        <div className="game">
-          <h2>Mental Math</h2>
-          <div className="equation">
-            <p className="text">{`${value1} + ${value2} + ${value3} = ${proposedAnswer}`}</p>
-          </div>
-          <button>True</button>
-          <button>False</button>
-          <p className="text">
-            Your Score: {numCorrect}/{numQuestions}
-          </p>
-        </div>
+        <Game onButtonClick={this.handleButtonClick} />
+        {/*
+        // These cause re-render of Game components
+        <Game key='2' onButtonClick={this.handleButtonClick.bind(this)} />
+        <Game key='2' onButtonClick={(e) => this.handleButtonClick(e)} />
+        */}
+        {this.renderGame()}
+        <Score numQuestions={this.state.numQuestions} numCorrect={this.state.numCorrect} />
       </div>
     );
   }
