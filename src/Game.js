@@ -3,12 +3,12 @@ import React from 'react';
 class Game extends React.PureComponent {
   constructor (props) {
     super(props);
-    const gameNumArr = this.generateNums();
+    const gameNums = this.generateNums();
     this.state = {
-      value1: gameNumArr[0],
-      value2: gameNumArr[1],
-      value3: gameNumArr[2],
-      proposedAnswer: gameNumArr[3]
+      value1: gameNums[0],
+      value2: gameNums[1],
+      value3: gameNums[2],
+      proposedAnswer: gameNums[3]
     }
   }
   
@@ -20,9 +20,23 @@ class Game extends React.PureComponent {
     return [value1, value2, value3, proposedAnswer];
   }
   
-  onButtonClick = e => {
-     this.props.onButtonClick(e);
+  updateState = () => {
+    const gameNums = this.generateNums();
+    this.setState(prevState => ({
+      value1: gameNums[0],
+      value2: gameNums[1],
+      value3: gameNums[2],
+      proposedAnswer: gameNums[3]
+    }))
   }
+
+  onButtonClick = e => {
+    console.log('e.target', e.target.innerText);
+    this.updateState();
+    const isCorrect = true;
+    this.props.onButtonClick(isCorrect);
+  }
+
   render() {
     // const { onButtonClick } = this.props;
     console.log(`Game component rendered`);

@@ -24,8 +24,8 @@ class App extends Component {
       numQuestions: currState.numQuestions + 1
     }))
   }*/
-  handleButtonClick = e => { // <- this form doesn't require bind 'this' in constructor
-    console.log('e.target', e.target.innerText);
+  handleButtonClick = isCorrect => { // <- this form doesn't require bind 'this' in constructor
+    
     this.setState(currState => ({
       numQuestions: currState.numQuestions + 1
     }))
