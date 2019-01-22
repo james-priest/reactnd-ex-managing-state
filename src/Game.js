@@ -31,9 +31,10 @@ class Game extends React.PureComponent {
   }
 
   onButtonClick = e => {
-    console.log('e.target', e.target.innerText);
+    // console.log('e.target', e.target.innerText);
     this.updateState();
-    const isCorrect = true;
+    const isCorrect = Boolean(e.target.innerText === 'False' ? false : true);
+    // console.log('isCorrect', isCorrect);
     this.props.onButtonClick(isCorrect);
   }
 

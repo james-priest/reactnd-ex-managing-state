@@ -27,7 +27,8 @@ class App extends Component {
   handleButtonClick = isCorrect => { // <- this form doesn't require bind 'this' in constructor
     
     this.setState(currState => ({
-      numQuestions: currState.numQuestions + 1
+      numQuestions: currState.numQuestions + 1,
+      numCorrect: isCorrect ? currState.numCorrect + 1 : currState.numCorrect
     }))
   };
   renderGame = game => (<Game onButtonClick={this.handleButtonClick} />)
