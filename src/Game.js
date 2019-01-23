@@ -30,10 +30,17 @@ class Game extends React.PureComponent {
     }))
   }
 
+  checkAnswer = (answer) => {
+    const isEqual = this.state.value1 + this.state.value2 + this.state.value3 === this.state.proposedAnswer;
+    // console.log(`${this.state.value1 + this.state.value2 + this.state.value3} === ${this.state.proposedAnswer}`);
+    return answer === isEqual;
+  }
+
   onButtonClick = e => {
     // console.log('e.target', e.target.innerText);
     this.updateState();
-    const isCorrect = Boolean(e.target.innerText === 'False' ? false : true);
+    const answer = Boolean(e.target.innerText === 'False' ? false : true);
+    const isCorrect = this.checkAnswer(answer)
     // console.log('isCorrect', isCorrect);
     this.props.onButtonClick(isCorrect);
   }
@@ -41,6 +48,7 @@ class Game extends React.PureComponent {
   render() {
     // const { onButtonClick } = this.props;
     console.log(`Game component rendered`);
+    console.log(`${this.state.value1 + this.state.value2 + this.state.value3} === ${this.state.proposedAnswer}`);
     return (
       <div className="game">
         <h2>Mental Math</h2>

@@ -13,7 +13,7 @@ class App extends Component {
     }
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }*/
-  // Defining state as a Class field means we can avoid this in the constructor
+  // Defining state as a Class field means we can avoid doing it in the constructor
   state = {
     numQuestions: 0,
     numCorrect: 0
@@ -25,7 +25,6 @@ class App extends Component {
     }))
   }*/
   handleButtonClick = isCorrect => { // <- this form doesn't require bind 'this' in constructor
-    
     this.setState(currState => ({
       numQuestions: currState.numQuestions + 1,
       numCorrect: isCorrect ? currState.numCorrect + 1 : currState.numCorrect
